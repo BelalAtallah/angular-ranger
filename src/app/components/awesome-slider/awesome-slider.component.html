@@ -1,0 +1,16 @@
+<div class="slider"  #sliderTrack>
+  <h1>WTF?</h1>
+  <div class="slider__track">
+    <div *ngFor="let tick of ticks" class="slider__tick" [ngStyle]="{'left': tick + '%'}">
+      <div class="slider__tick-label">{{ tick }}</div>
+    </div>
+    <div *ngFor="let handle of handles$ | async; let i = index" class="slider__handle"
+      [ngStyle]="{'left': handle.value + '%'}" [ngClass]="{'slider__handle--active': draggedId === handle.id }"
+      (mousedown)="onMouseDown($event, handle)">
+      {{ handle.value }}
+    </div>
+    <div *ngFor="let segment of segments$ | async" class="slider__segment"
+      [ngStyle]="{'left': segment?.left + '%', 'width': (segment?.right - segment?.left) + '%', 'background': segment?.color}">
+    </div>
+  </div>
+</div>
